@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import api from '../../config/api';
+import { Link } from 'react-router-dom';
 
 export default function Main() {
   const peoples = ['Prefeitura', 'Carmago', 'Manoel', 'João', 'Oziel', 'Preto',
@@ -16,17 +17,31 @@ export default function Main() {
     spent: {},
   });
 
+  const [sucess, setSucess] = useState(false);
+
   function handleChange(event) {
     setSpent({ ...spent, [Number(event.target.id) + 1]: Number(event.target.value) });
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
+    console.log(data);
+    try {
+      await api({
+        method: 'post',
+        url: '/',
+        data,
+      });
+      setSucess(true);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  useEffect(() => {
     setData({
       ...data, spent,
     });
-    console.log(data);
-  }
+  }, [spent]);
 
   function handleChangeHeader(event) {
     setData({
@@ -44,14 +59,16 @@ export default function Main() {
     </>
   ));
 
-  return (
+  const sucessFalse = (
     <>
       <h1>criar tabela de gasto</h1>
+      <Link to="/"><button>Menu</button></Link><br />
+      <br />
       <span>Titulo</span>
       <input onChange={handleChangeHeader} name="title" />
       <br />
       <span>Gasto Total</span>
-      <input onChange={handleChangeHeader} name="totalSpendMoney" type="number" />
+      <input onChange={handleChangeHeader} name="totalSpendMoney" type="number" step="0.01" />
       <br />
       <span>date</span>
       <input onChange={handleChangeHeader} name="date" type="date" />
@@ -69,5 +86,15 @@ export default function Main() {
         <button type="submit">Enviar</button>
       </form>
     </>
+  );
+
+  const sucessTrue = (
+    <h1>Cadastrada com sucesso</h1>
+  );
+
+  const renderizar = sucess ? sucessTrue : sucessFalse;
+
+  return (
+    <div>{renderizar}</div>
   );
 }

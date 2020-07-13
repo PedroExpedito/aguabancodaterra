@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, {useState } from 'react';
 import api from '../../config/api';
+import { Link } from 'react-router-dom';
 
 export default function ShowTable() {
   const [dataTable, setDataTable] = useState({ });
@@ -11,6 +12,7 @@ export default function ShowTable() {
   const [spentMoney, setSpentMoney] = useState([]);
   const [spentMoneyTribute, setSpentMoneyTribute] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [sumConsume, setSumConsume] = useState();
 
   async function getData() {
     const { data } = await api({
@@ -23,6 +25,7 @@ export default function ShowTable() {
     setConsume(Object.values(data.consume));
     setSpentMoney(Object.values(data.spentMoney));
     setSpentMoneyTribute(Object.values(data.spentMoneyTribute));
+    setSumConsume(data.sumConsume);
   }
 
   function handleChange(event) {
@@ -54,10 +57,10 @@ export default function ShowTable() {
         <span>{consume[index]}</span>
       </td>
       <td>
-        <span>{`R$: ${spentMoney[index]}`}</span>
+        <span>{`R$: ${Number(spentMoney[index]).toFixed(2)}`}</span>
       </td>
       <td>
-        <span>{spentMoneyTribute[index]}</span>
+        <span>{`R$: ${Number(spentMoneyTribute[index]).toFixed(2)}`}</span>
       </td>
     </tr>
   )) : <span>Selecione a data e clique em enviar</span>;
@@ -68,20 +71,35 @@ export default function ShowTable() {
         <tbody>
           <tr>
             <td>
-              valor gasto:
+              gasto:
               <span>{dataTable.totalSpendMoney}</span>
             </td>
             <td>
-              <span>Mes anterior</span>
+              <span>Anterior</span>
             </td>
-            <td><span>Mes Atual</span></td>
-            <td><span>Consumo</span></td>
+            <td><span>Atual</span></td>
+            <td><span>Consum</span></td>
             <td><span>valor</span></td>
-            <td><span>valor+Taxa</span></td>
+            <td><span>+Taxa</span></td>
           </tr>
           {tablePeoples}
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{sumConsume}</td>
+            <td>{`R$: ${Number(dataTable.totalSpendMoney).toFixed(2)}`}</td>
+            <td>{`R$: ${Number(dataTable.sumSpentMoneyTribute).toFixed(2)}`}</td>
+          </tr>
         </tbody>
-
       </table>
     </div>
   );
@@ -95,6 +113,7 @@ export default function ShowTable() {
         <button type="submit">Enviar</button>
         <div>{table}</div>
       </form>
+      <Link to="/"><button>MENU</button></Link>
     </>
   );
 }
