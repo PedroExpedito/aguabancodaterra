@@ -45,25 +45,25 @@ export default function ShowTable() {
   const tablePeoples = date && loading ? peoples.map((x, index) => (
     <tr key={x}>
       <td>
-        <span>{x}</span>
+        {x}
       </td>
       <td>
-        <span>{afterMonth[index]}</span>
+        {afterMonth[index]}
       </td>
       <td>
-        <span>{currentMonth[index]}</span>
+        {currentMonth[index]}
       </td>
       <td>
-        <span>{consume[index]}</span>
+        {consume[index]}
       </td>
       <td>
-        <span>{`R$: ${Number(spentMoney[index]).toFixed(2)}`}</span>
+        {`R$: ${Number(spentMoney[index]).toFixed(2)}`}
       </td>
       <td>
-        <span>{`R$: ${Number(spentMoneyTribute[index]).toFixed(2)}`}</span>
+        {`R$: ${Number(spentMoneyTribute[index]).toFixed(2)}`}
       </td>
     </tr>
-  )) : <span>Selecione a data e clique em enviar</span>;
+  )) : <span> Selecione a data e clique em enviar</span>;
 
   const table = (
     <div>
@@ -72,15 +72,15 @@ export default function ShowTable() {
           <tr>
             <td>
               gasto:
-              <span>{dataTable.totalSpendMoney}</span>
+              {dataTable.totalSpendMoney}
             </td>
             <td>
-              <span>Anterior</span>
+              Anterior
             </td>
-            <td><span>Atual</span></td>
-            <td><span>Consum</span></td>
-            <td><span>valor</span></td>
-            <td><span>+Taxa</span></td>
+            <td>Atual</td>
+            <td>Consum</td>
+            <td>valor</td>
+            <td>+Taxa</td>
           </tr>
           {tablePeoples}
           <tr>
@@ -107,7 +107,7 @@ export default function ShowTable() {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <span>Insira a data</span>
+        <h2>Insira a data</h2>
         <input type="date" onChange={handleChange} />
         <br />
         <button type="submit">Enviar</button>

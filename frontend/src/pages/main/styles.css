@@ -1,11 +1,25 @@
+* {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+}
+h2 {
+  padding-left: 25px;
+}
+h1 {
+  padding-top: 30px;
+  padding-left: 25px;
+}
+
 button {
   color: black;
-  background-color: #eee;
+  background-color: #BBDEFB;
   width:90px;
   height:90px;
   font-size: 20px;
   margin-left: 130px;
   margin-top: 40px;
+  border-radius: 20px;
+  font-size: 20px;
 }
 
 input {
@@ -13,6 +27,15 @@ input {
   margin-top: 3px;
   background-color: #eee;
   width: 250px;
+}
+input[type="date"] {
+  color: black;
+  margin-top: 3px;
+  background-color: #eee;
+  margin-left: 35px;
+  width: 260px;
+  height: 90px;
+  border-radius: 25px;
 }
 
 span {

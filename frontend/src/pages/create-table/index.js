@@ -52,9 +52,8 @@ export default function Main() {
   const people = peoples.map((x, index) => (
     <>
       <tr>
-        <td><span>{x}</span></td>
-        <td><input name={index} onChange={handleChange} type="number" id={index} /></td>
-        <br />
+        <td>{x}</td>
+        <td><input key={x} name={index} onChange={handleChange} type="number" id={index} /></td>
       </tr>
     </>
   ));
@@ -64,24 +63,35 @@ export default function Main() {
       <h1>criar tabela de gasto</h1>
       <Link to="/"><button>Menu</button></Link><br />
       <br />
-      <span>Titulo</span>
-      <input onChange={handleChangeHeader} name="title" />
+      <span>Data</span>
+      <input key="date" onChange={handleChangeHeader} name="date" type="date" />
       <br />
-      <span>Gasto Total</span>
-      <input onChange={handleChangeHeader} name="totalSpendMoney" type="number" step="0.01" />
       <br />
-      <span>date</span>
-      <input onChange={handleChangeHeader} name="date" type="date" />
       <br />
-      <span>Tributo</span>
-      <input onChange={handleChangeHeader} name="tribute" type="number" />
+      <table>
+        <tbody>
+          <tr>
+            <td>Titulo</td>
+            <td><input key="title" onChange={handleChangeHeader} name="title" /></td>
+          </tr>
+          <tr>
+            <td>Gasto Total</td>
+              <td><input key="totalSpendMoney" onChange={handleChangeHeader} name="totalSpendMoney" type="number" step="0.01" /></td>
+          </tr>
+          <tr>
+            <td><span>Tributo</span></td>
+            <td><input key="tribute" onChange={handleChangeHeader} name="tribute" type="number" /></td>
+          </tr>
+        </tbody>
+      </table>
       <br />
-
-      <span>Gasto</span>
+      <br />
       <br />
       <form onSubmit={handleSubmit}>
         <table>
-          {people}
+          <tbody>
+            {people}
+          </tbody>
         </table>
         <button type="submit">Enviar</button>
       </form>
