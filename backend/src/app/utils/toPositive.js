@@ -1,11 +1,8 @@
-function toPositive(n) {
-  if (n === 0) {
-    return 0;
+function toPositive(currentMonth, afterMonth) {
+  if (currentMonth >= afterMonth) {
+    return (currentMonth - afterMonth);
   }
-  if (n < 0) {
-    return n * -1;
-  }
-  return n;
+  return (9999 - afterMonth + currentMonth);
 }
 
 export default toPositive;

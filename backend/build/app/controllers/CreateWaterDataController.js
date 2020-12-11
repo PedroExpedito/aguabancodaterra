@@ -1,17 +1,17 @@
-import parseISO from 'date-fns/parseISO';
-import endOfMonth from 'date-fns/endOfMonth';
-import subMonths from 'date-fns/subMonths';
-import startOfMonth from 'date-fns/startOfMonth';
-import * as Yup from 'yup';
-import waterSchema from '../schemas/waterSchema';
-import toPositive from '../utils/toPositive';
+"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { newObj[key] = obj[key]; } } } newObj.default = obj; return newObj; } } function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }var _parseISO = require('date-fns/parseISO'); var _parseISO2 = _interopRequireDefault(_parseISO);
+var _endOfMonth = require('date-fns/endOfMonth'); var _endOfMonth2 = _interopRequireDefault(_endOfMonth);
+var _subMonths = require('date-fns/subMonths'); var _subMonths2 = _interopRequireDefault(_subMonths);
+var _startOfMonth = require('date-fns/startOfMonth'); var _startOfMonth2 = _interopRequireDefault(_startOfMonth);
+var _yup = require('yup'); var Yup = _interopRequireWildcard(_yup);
+var _waterSchema = require('../schemas/waterSchema'); var _waterSchema2 = _interopRequireDefault(_waterSchema);
+var _toPositive = require('../utils/toPositive'); var _toPositive2 = _interopRequireDefault(_toPositive);
 
-export default {
+exports. default = {
   async update(req, res) {
     const data = req.body;
     const { id } = req.params;
 
-    const exist = await waterSchema.findById(id);
+    const exist = await _waterSchema2.default.findById(id);
 
     const paramsSchema = Yup.string().min(24).max(25).required();
     console.log(id);
@@ -53,8 +53,8 @@ export default {
 
     try {
       const { date } = data;
-      data.date = startOfMonth(parseISO(date));
-      await waterSchema.findByIdAndUpdate(id, data);
+      data.date = _startOfMonth2.default.call(void 0, _parseISO2.default.call(void 0, date));
+      await _waterSchema2.default.findByIdAndUpdate(id, data);
       return res.json({ sucess: true });
     } catch (err) {
       return res.status(400).json({ erro: err });
@@ -90,9 +90,9 @@ export default {
       return res.status(400).json({ error: 'Validations fails' });
     }
 
-    const date = startOfMonth(parseISO(data.date));
+    const date = _startOfMonth2.default.call(void 0, _parseISO2.default.call(void 0, data.date));
 
-    const existTable = await waterSchema.find({
+    const existTable = await _waterSchema2.default.find({
       date,
     });
 
@@ -100,12 +100,12 @@ export default {
       return res.status(400).json({ error: 'Já existe uma tabela com essa data' });
     }
 
-    const afterTable = subMonths(date, 1);
+    const afterTable = _subMonths2.default.call(void 0, date, 1);
 
-    const results = await waterSchema.find({
+    const results = await _waterSchema2.default.find({
       date: {
-        $gte: startOfMonth(afterTable),
-        $lte: endOfMonth(afterTable),
+        $gte: _startOfMonth2.default.call(void 0, afterTable),
+        $lte: _endOfMonth2.default.call(void 0, afterTable),
       },
     });
 
@@ -113,9 +113,9 @@ export default {
       res.status(400).json({ erro: 'Não existe tabela anterior' });
     }
 
-    data.date = startOfMonth(date);
+    data.date = _startOfMonth2.default.call(void 0, date);
 
-    await waterSchema.create(data);
+    await _waterSchema2.default.create(data);
 
     return res.json(results);
   },
@@ -131,10 +131,10 @@ export default {
       return res.status(400).json({ error: 'Validations fails' });
     }
 
-    const parsedDate = startOfMonth(parseISO(date));
+    const parsedDate = _startOfMonth2.default.call(void 0, _parseISO2.default.call(void 0, date));
     console.log(parsedDate);
 
-    const table = await waterSchema.find({
+    const table = await _waterSchema2.default.find({
       date: parsedDate,
     });
 
@@ -142,8 +142,8 @@ export default {
       return res.status(400).json({ error: 'Não existe tabela com está data' });
     }
 
-    const afterTable = await waterSchema.find({
-      date: subMonths(parsedDate, 1),
+    const afterTable = await _waterSchema2.default.find({
+      date: _subMonths2.default.call(void 0, parsedDate, 1),
     });
 
     if (!afterTable.length) {
@@ -157,7 +157,7 @@ export default {
     // V = Value
     const consume = Object.fromEntries(
       Object.entries(currentMonth)
-        .map(([key]) => [key, toPositive(currentMonth[key], afterMonth[key])]),
+        .map(([key]) => [key, _toPositive2.default.call(void 0, currentMonth[key], afterMonth[key])]),
     );
 
     const sum = Object.values(consume).reduce((a, b) => a + b);
