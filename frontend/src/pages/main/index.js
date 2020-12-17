@@ -4,7 +4,7 @@ import './styles.css';
 export default function Main() {
   return (
     <>
-      <div>
+      <div className="main">
         <h1>Agua Banco da terra</h1>
         <Link to="create-table"><button>Criar Tabela</button></Link>
         <br />

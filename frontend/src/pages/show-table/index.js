@@ -67,11 +67,11 @@ export default function ShowTable() {
 
   const table = (
     <div>
-      <table border="1">
+      <table>
         <tbody>
           <tr>
             <td>
-              gasto:
+              gasto R$:
               {dataTable.totalSpendMoney}
             </td>
             <td>
@@ -87,14 +87,6 @@ export default function ShowTable() {
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
             <td>{sumConsume}</td>
             <td>{`R$: ${Number(dataTable.totalSpendMoney).toFixed(2)}`}</td>
             <td>{`R$: ${Number(dataTable.sumSpentMoneyTribute).toFixed(2)}`}</td>
@@ -105,7 +97,7 @@ export default function ShowTable() {
   );
 
   return (
-    <>
+    <div className="main">
       <form onSubmit={handleSubmit}>
         <h2>Insira a data</h2>
         <input type="date" onChange={handleChange} />
@@ -114,6 +106,6 @@ export default function ShowTable() {
         <div>{table}</div>
       </form>
       <Link to="/"><button>MENU</button></Link>
-    </>
+    </div>
   );
 }

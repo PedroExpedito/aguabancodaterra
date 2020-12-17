@@ -60,41 +60,31 @@ export default function Main() {
 
   const sucessFalse = (
     <>
-      <h1>criar tabela de gasto</h1>
-      <Link to="/"><button>Menu</button></Link><br />
+      <h1>Criar tabela de gasto</h1>
       <br />
       <span>Data</span>
       <input key="date" onChange={handleChangeHeader} name="date" type="date" />
-      <br />
-      <br />
-      <br />
-      <table>
-        <tbody>
+      <form onSubmit={handleSubmit}>
+        <table>
+          <tbody>
           <tr>
             <td>Titulo</td>
             <td><input key="title" onChange={handleChangeHeader} name="title" /></td>
           </tr>
           <tr>
-            <td>Gasto Total</td>
+            <td>Gasto Total </td>
               <td><input key="totalSpendMoney" onChange={handleChangeHeader} name="totalSpendMoney" type="number" step="0.01" /></td>
           </tr>
           <tr>
             <td><span>Tributo</span></td>
             <td><input key="tribute" onChange={handleChangeHeader} name="tribute" type="number" /></td>
           </tr>
-        </tbody>
-      </table>
-      <br />
-      <br />
-      <br />
-      <form onSubmit={handleSubmit}>
-        <table>
-          <tbody>
             {people}
           </tbody>
         </table>
         <button type="submit">Enviar</button>
       </form>
+      <Link to="/"><button>Menu</button></Link><br />
     </>
   );
 
@@ -105,6 +95,6 @@ export default function Main() {
   const renderizar = sucess ? sucessTrue : sucessFalse;
 
   return (
-    <div>{renderizar}</div>
+    <div className="main">{renderizar}</div>
   );
 }

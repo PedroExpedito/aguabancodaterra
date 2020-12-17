@@ -92,23 +92,24 @@ export default function Main() {
   const sucessFalse = (
     <>
       <h1>Editar tabela de gasto</h1>
-      <span>Titulo</span>
-      <input value={data.title} onChange={handleChangeHeader} name="title" />
-      <br />
-      <span>Gasto Total</span>
-      <input value={data.totalSpendMoney} onChange={handleChangeHeader} name="totalSpendMoney" type="number" />
       <br />
       <span>Data</span>
       <input value={data.date} onChange={handleChangeHeader} name="date" type="date" />
       <br />
-      <span>Tributo</span>
-      <input value={10} onChange={handleChangeHeader} name="tribute" type="number" />
-      <br />
-
-      <span>Gasto</span>
-      <br />
       <form onSubmit={handleSubmit}>
         <table>
+          <tr>
+            <td>Titulo</td>
+            <td><input value={data.title} onChange={handleChangeHeader} name="title" /></td>
+          </tr>
+          <tr>
+            <td>Gasto Total</td>
+            <td><input value={data.totalSpendMoney} onChange={handleChangeHeader} name="totalSpendMoney" type="number" /></td>
+          </tr>
+          <tr>
+            <td>Tributo</td>
+            <td><input value={10} onChange={handleChangeHeader} name="tribute" type="number" /></td>
+          </tr>
           {people}
         </table>
         <button type="submit">Enviar</button>
@@ -131,10 +132,10 @@ export default function Main() {
 
 
   return (
-    <>
+    <div className="main">
       <div>{selectData}</div>
       <Link to="/"> <button>MENU</button></Link>
-    </>
+    </div>
   );
 }
 
