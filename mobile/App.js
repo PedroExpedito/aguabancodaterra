@@ -7,7 +7,7 @@ function App() {
     <>
       <StatusBar hidden />
       <WebView
-        source={{uri: 'http://192.168.0.101:5000'}}
+        source={{uri: 'http://192.168.0.108:5000'}}
         ref={(ref) => {
           this.webView = ref;
         }}

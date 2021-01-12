@@ -15,6 +15,7 @@ export default function ShowTable() {
   const [sumConsume, setSumConsume] = useState();
 
   async function getData() {
+    console.log(date);
     const { data } = await api({
       method: 'get',
       url: `/table/${date}`,
